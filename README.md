@@ -1,7 +1,5 @@
-# crystallize_webhook_server
+# Crystallize Webhook Server Example
 Crystallize web hook server example.
-
-This example
 
 To run this locally perform the following:
 ```
