@@ -5,6 +5,19 @@ var bodyParser = require('body-parser');
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
+app.all("*", function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header(
+    "Access-Control-Allow-Headers",
+    "Origin, X-Crystallize-Webhook-Token, Content-Type, Accept"
+  );
+  res.header(
+    "Access-Control-Allow-Methods",
+    "PUT, GET, POST, DELETE, OPTIONS, PATCH"
+  );
+  next();
+});
+
 function handleSubscriptionHook(payload, token) {
   return new Promise(function(resolve, reject) {
 
@@ -19,7 +32,7 @@ function handleSubscriptionHook(payload, token) {
         payload.cart.items.forEach(function(item) {
           console.log(item.name);
           console.log(item.reference);
-          console.log(item.merchant_item_data);
+          console.log(item.total_price_including_tax);
         });
 
         // Do your  entitlement here:
